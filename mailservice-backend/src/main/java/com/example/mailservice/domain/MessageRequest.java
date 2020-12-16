@@ -4,9 +4,15 @@ import com.google.common.base.MoreObjects;
 
 public final class MessageRequest {
 
-	public String email;
-	public String subject;
-	public String body;
+	public final String email;
+	public final String subject;
+	public final String body;
+
+	public MessageRequest(String email, String subject, String body) {
+		this.email = email;
+		this.subject = subject;
+		this.body = body;
+	}
 
 	@Override
 	public String toString() {
