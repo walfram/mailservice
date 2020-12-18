@@ -27,8 +27,6 @@ public final class MailService {
 
 	@Scheduled(fixedRate = 10 * 1000, initialDelay = 1000)
 	public void sendMail() {
-		logger.debug("executing mail send");
-
 		List<MessageEntity> unsentMessages = messageRepository.fetchUnsentMessages();
 		logger.debug("found unsent messages = {}", unsentMessages.size());
 
