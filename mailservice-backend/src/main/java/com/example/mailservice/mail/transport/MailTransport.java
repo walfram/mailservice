@@ -1,4 +1,4 @@
-package com.example.mailservice.mailer;
+package com.example.mailservice.mail.transport;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.example.mailservice.domain.MessageEntity;
  * Implementation must use "markAsSent" method of MessageEntity to indicate that this message has been sent
  * 
  */
-public interface Mailer {
+public interface MailTransport {
 
 	public void sendOne(MessageEntity unsentMessage);
 

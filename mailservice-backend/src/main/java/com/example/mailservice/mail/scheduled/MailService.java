@@ -1,4 +1,4 @@
-package com.example.mailservice.scheduled;
+package com.example.mailservice.mail.scheduled;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.example.mailservice.domain.MessageEntity;
-import com.example.mailservice.mailer.Mailer;
+import com.example.mailservice.mail.transport.MailTransport;
 import com.example.mailservice.repos.MessageRepository;
 
 @Component
@@ -18,11 +18,11 @@ public final class MailService {
 
 	private final MessageRepository messageRepository;
 
-	private final Mailer mailer;
+	private final MailTransport mailTransport;
 
-	public MailService(MessageRepository messageRepository, Mailer mailer) {
+	public MailService(MessageRepository messageRepository, MailTransport mailer) {
 		this.messageRepository = messageRepository;
-		this.mailer = mailer;
+		this.mailTransport = mailer;
 	}
 
 	@Scheduled(fixedRate = 10 * 1000, initialDelay = 1000)
@@ -32,7 +32,7 @@ public final class MailService {
 		List<MessageEntity> unsentMessages = messageRepository.fetchUnsentMessages();
 		logger.debug("found unsent messages = {}", unsentMessages.size());
 
-		mailer.sendBulk(unsentMessages);
+		mailTransport.sendBulk(unsentMessages);
 
 		unsentMessages.forEach(e -> messageRepository.save(e));
 	}

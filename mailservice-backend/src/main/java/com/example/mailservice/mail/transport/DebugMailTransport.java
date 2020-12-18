@@ -1,4 +1,4 @@
-package com.example.mailservice.mailer;
+package com.example.mailservice.mail.transport;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 import com.example.mailservice.domain.MessageEntity;
 
 @Component
-public final class DebugMailer implements Mailer {
+public final class DebugMailTransport implements MailTransport {
 
-	private static final Logger logger = LoggerFactory.getLogger(DebugMailer.class);
+	private static final Logger logger = LoggerFactory.getLogger(DebugMailTransport.class);
 
 	@Override
 	public void sendOne(MessageEntity messageEntity) {
